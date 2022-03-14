@@ -21,9 +21,11 @@
 
 //   it( 'where the parameters are one object and uuid word', () =>
 //   {
-//     const expectedSimple = [ { '' => 1 },
-//     { 'innerTwo' => 2 },
-//     { 'innerTwo/innerThree/innerFour' => 3 } ];
+//     const expectedSimple = {
+//       '' => 1,
+//       'innerTwo' => 2,
+//       'innerTwo/innerThree/innerFour' => 3,
+//     };
 //     const result = extractValueForKey( {
 //       uuid: 1,
 //       innerOne: {
@@ -39,14 +41,14 @@
 //         }
 //       }
 //     }, 'uuid' )
-//     expect( result ).toContain( expect.arrayContaining( expectedSimple ) );
+//     expect( result ).toBe( expectedSimple );
 //   } )
 
 //   it( 'where the parameters are one object someObject and uuid word', () =>
 //   {
 //     const expectedSimple = [ 'someObject' => 1,
-//     'someObject/innerTwo' => 2,
-//     'someObject/innerTwo/innerTwo/innerFour' => 3,],
+//       'someObject/innerTwo' => 2,
+//         'someObject/innerTwo/innerTwo/innerFour' => 3,],
 //     const result = extractValueForKey( someObject, 'uuid' );
 //     expect( result ).toContain( expect.arrayContaining( expected ) );
 //   } );
