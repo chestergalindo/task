@@ -1,58 +1,67 @@
-// const { extractValueForKey } = require( '../taskThree' );
+const { extractValueForKey } = require( '../taskThree' );
 
-// const someObject = {
-//   uuid: 1,
-//   innerOne: {
-//     someKey: "some text"
-//   },
-//   innerTwo: {
-//     uuid: 2,
-//     innerTwo: {
-//       someOtherKey: "some other text",
-//       innerFour: {
-//         uuid: 3
-//       }
-//     }
-//   }
-// }
+const someObject = {
+  uuid: 1,
+  innerOne: {
+    someKey: "some text"
+  },
+  innerTwo: {
+    uuid: 2,
+    innerThree: {
+      someOtherKey: "some other text",
+      innerFour: {
+        uuid: 3
+      }
+    }
+  }
+}
 
-// describe( 'extractValueForKey function', function ()
-// {
+const expectedSimple = new Map
 
-//   it( 'where the parameters are one object and uuid word', () =>
-//   {
-//     const expectedSimple = {
-//       '' => 1,
-//       'innerTwo' => 2,
-//       'innerTwo/innerThree/innerFour' => 3,
-//     };
-//     const result = extractValueForKey( {
-//       uuid: 1,
-//       innerOne: {
-//         someKey: "some text"
-//       },
-//       innerTwo: {
-//         uuid: 2,
-//         innerThree: {
-//           someOtherKey: "some other text",
-//           innerFour: {
-//             uuid: 3
-//           }
-//         }
-//       }
-//     }, 'uuid' )
-//     expect( result ).toBe( expectedSimple );
-//   } )
+expectedSimple.set( '', 1 )
+expectedSimple.set( 'innerTwo', 2 )
+expectedSimple.set( 'innerTwo/innerThree/innerFour', 3 )
 
-//   it( 'where the parameters are one object someObject and uuid word', () =>
-//   {
-//     const expectedSimple = [ 'someObject' => 1,
-//       'someObject/innerTwo' => 2,
-//         'someObject/innerTwo/innerTwo/innerFour' => 3,],
-//     const result = extractValueForKey( someObject, 'uuid' );
-//     expect( result ).toContain( expect.arrayContaining( expected ) );
-//   } );
+const expectedSimpleNameObject = new Map
 
-// } );
+expectedSimpleNameObject.set( 'someObject', 1 )
+expectedSimpleNameObject.set( 'someObject/innerTwo', 2 )
+expectedSimpleNameObject.set( 'someObject/innerTwo/innerThree/innerFour', 3 )
+
+describe( 'extractValueForKey function', function ()
+{
+  it( 'where the parameters are one object and uuid word', () =>
+  {
+    const result = extractValueForKey( {
+      uuid: 1,
+      innerOne: {
+        someKey: "some text"
+      },
+      innerTwo: {
+        uuid: 2,
+        innerThree: {
+          someOtherKey: "some other text",
+          innerFour: {
+            uuid: 3
+          }
+        }
+      }
+    }, 'uuid' )
+    expectedSimple.forEach( ( value, key ) =>
+    {
+      expect( result.get( key ) ).toEqual( value )
+    } )
+  } )
+
+  it( 'where the parameters are one object someObject and uuid word', () =>
+  {
+    const result = extractValueForKey( { someObject }, 'uuid' );
+    expectedSimpleNameObject.forEach( ( value, key ) =>
+    {
+      expect( result.get( key ) ).toEqual( value )
+    } )
+  } );
+
+} );
 
 
