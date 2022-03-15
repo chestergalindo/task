@@ -1,3 +1,8 @@
+/**
+ * hof - first version for pluss elements
+  * @param {*} a (number)(function)
+ * @returns {function} => void
+ */
 
 function sum ( a )
 {

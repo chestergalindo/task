@@ -1,3 +1,9 @@
+/**
+ * hof - first version for plus elements with recursion
+  * @param {*} a (number)(function)
+ * @returns {function} => void
+ */
+
 function sum ( a )
 {
   let defaultValue = 0;

@@ -1,3 +1,8 @@
+/**
+ * searh key in object and return direction path
+  * @param {*} a (object,searchKey)
+ * @returns {Map} => directions of searchKey
+ */
 
 function extractValueForKey ( object, searchKey )
 {
